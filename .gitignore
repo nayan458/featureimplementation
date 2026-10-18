@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+## scripts
+deserialize.sh
+output.txt
+localscripts/
