@@ -8,6 +8,7 @@
 		<version>4.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<packaging>pom</packaging>
 	<modules>
 		<module>addroomshotelmanagement</module>
 		<module>generateinvoices</module>
