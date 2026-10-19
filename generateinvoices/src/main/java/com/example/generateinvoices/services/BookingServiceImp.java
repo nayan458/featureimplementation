@@ -12,18 +12,16 @@ import com.example.generateinvoices.models.Invoice;
 import com.example.generateinvoices.models.Room;
 import com.example.generateinvoices.repositories.BookingRepository;
 import com.example.generateinvoices.repositories.CustomerSessionRepository;
-import com.example.generateinvoices.repositories.imp.BookingRepositoryImp;
-import com.example.generateinvoices.repositories.imp.CustomerSessionRepositoryImp;
 
 public class BookingServiceImp implements BookingService {
-    private static CustomerSessionRepository customerSessionRepository;
-    private static BookingRepository bookingRepository;
+    private CustomerSessionRepository customerSessionRepository;
+    private BookingRepository bookingRepository;
     private static double GST_IN_PERCENTAGE = 18;
     private static double SERVICE_CHARGE_IN_PERCENTAGE = 10;
 
-    public BookingServiceImp() {
-        customerSessionRepository = new CustomerSessionRepositoryImp();
-        bookingRepository = new BookingRepositoryImp();
+    public BookingServiceImp(CustomerSessionRepository customerSessionRepository, BookingRepository bookingRepository) {
+        this.customerSessionRepository = customerSessionRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     @Override
@@ -43,15 +41,24 @@ public class BookingServiceImp implements BookingService {
         Map<Room, Integer> bookedRooms = new HashMap<>();
 
         for(Booking booking: bookings) {
-            bookedRooms.putAll(booking.getBookedRooms());
-            for(Integer cost: booking.getBookedRooms().values()) 
-                totalCost += cost;
+            for(Map.Entry<Room, Integer> entry: booking.getBookedRooms().entrySet()){
+                Room room = entry.getKey();
+                int quantity = entry.getValue();
+                double cost = room.getPrice();
+
+                bookedRooms.put(room, bookedRooms.getOrDefault(room, 0) + quantity);
+                totalCost += ((double)quantity * cost);
+            }
         }
 
         bookingRepository.delete(customerSessionId);
         
+        double gst = calcGst(totalCost);
+        double serviceCharge = calcServiceCharge(totalCost);
+        double totalAmount = totalCost + gst + serviceCharge;
+
         invoice.setBookedRooms(bookedRooms);
-        invoice.setTotalAmount(totalCost);
+        invoice.setTotalAmount(totalAmount);
         invoice.setGst(calcGst(totalCost));
         invoice.setServiceCharge(calcServiceCharge(totalCost));
 
