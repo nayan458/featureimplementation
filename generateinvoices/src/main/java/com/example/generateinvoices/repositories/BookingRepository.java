@@ -8,5 +8,7 @@ public interface BookingRepository {
     Booking save(Booking booking);
 
     List<Booking> findBookingByCustomerSession(long customerSessionId);
+
+    void delete(long customerSessionId);
 }
 
