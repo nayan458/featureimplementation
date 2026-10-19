@@ -26,3 +26,7 @@ Your task is to implement the following functionality in the system.
 * Refer the models package for reference of the models.
 * Implement the `RoomRepository`, `RoomService` & `UserRepository` interfaces to achieve the above requirements.
 * Please implement an in memory database to store the rooms. You can use any data structure of your choice to store the rooms.
+
+<!-- My notes
+user tries to add room -> check if admin -> add the room details
+-->
