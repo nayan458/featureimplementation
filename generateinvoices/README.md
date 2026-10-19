@@ -27,3 +27,16 @@ Your task is to implement the following functionality in the system.
 * Refer the models package for reference of the models.
 * Implement the `BookingRepository`, `CustomerSessionRepository` and `BookingService` interfaces to achieve the above requirements.
 * Please implement an in memory database to store the rooms. You can use any data structure of your choice to store the rooms.
+
+<!-- 
+
+Customer Book a room -> check if customer session exist
+   -> NO
+      -> create customer session -> create a new booking -> add the room to the booking
+   -> YES
+      -> get the customer session -> add the room to the booking
+
+Customer request for invoice -> Customer session ends -> get the rooms booked -> add gst -> return invoice
+
+
+ -->
