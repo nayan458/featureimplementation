@@ -15,8 +15,10 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> getRooms(String roomType) {
-       //ToDo
-       return null;
+        if(roomType == null)
+            return roomRepository.getRooms();
+        RoomType type = RoomType.valueOf(roomType.toUpperCase());
+       return roomRepository.getRoomsByRoomType(type);
     }
 }
 
