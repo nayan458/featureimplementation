@@ -12,6 +12,8 @@
 	<modules>
 		<module>addroomshotelmanagement</module>
 		<module>generateinvoices</module>
+		<module>bookrooms</module>
+		<module>getrooms</module>
 	</modules>
 	<groupId>com.example</groupId>
 	<artifactId>featureimplementation</artifactId>
