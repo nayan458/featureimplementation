@@ -30,3 +30,11 @@ Your task is to implement the following functionality in the system.
 
 
 
+<!-- 
+Customer Book a room -> check if customer session exist
+   -> NO
+      -> create customer session -> create a new booking -> add the room to the booking
+   -> YES
+      -> get the customer session -> add the room to the booking
+
+ -->
